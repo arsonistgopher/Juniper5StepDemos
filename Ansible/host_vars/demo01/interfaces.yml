@@ -1,0 +1,9 @@
+---
+vlan:
+    unit: 42
+    name: DT
+l3iface:
+    unit: 42
+    address: 10.10.42.1/24
+accessport:
+    name: ge-0/0/42    

@@ -1,0 +1,7 @@
+# Pre-tests for demo
+hosts:
+  - device: demo01
+    username: tf
+    passwd: Passw0rd
+tests:
+  - ./tests/pre.yml 

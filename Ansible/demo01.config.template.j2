@@ -1,0 +1,27 @@
+interfaces {
+    {{ accessport.name }} {
+        unit 0 {
+            family ethernet-switching {
+                interface-mode access;
+                vlan {
+                    members {{ vlan.name }};
+                }
+            }
+        }
+    }
+    irb {
+        unit {{ l3iface.unit }} {
+            family inet {
+                address {{ l3iface.address }};
+            }
+        }
+    }
+}
+
+vlans {
+    {{ vlan.name }} {
+        vlan-id {{ vlan.unit }};
+        l3-interface irb.{{ l3iface.unit }};
+    }
+}
+
