@@ -1,0 +1,36 @@
+test_phy:
+  - rpc: get-config
+  - kwargs:
+      filter_xml: configuration/interfaces
+  - iterate:
+      id: ./name
+      xpath: 'interfaces/interface'
+      tests:
+        - not-equal: name, ge-0/0/42
+          info: "Interface does not exist"
+          err: "-"
+
+
+test_irb:
+  - rpc: get-config
+  - kwargs:
+      filter_xml: configuration/interfaces
+  - iterate:
+      id: ./name
+      xpath: 'interfaces/interface[name="irb"]/unit'
+      tests:
+        - not-equal: name, 42
+          info: "Interface does not exist"
+          err: "-"
+
+test_vlan:
+  - rpc: get-config
+  - kwargs:
+      filter_xml: configuration/vlans
+  - iterate:
+      id: ./vlan
+      xpath: 'vlans/vlan'
+      tests:
+        - not-equal: name, DT
+          info: "VLAN does not exist"
+          err: "-"

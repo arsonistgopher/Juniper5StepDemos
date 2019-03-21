@@ -1,0 +1,41 @@
+---
+VLANTable:
+  set: vlans/vlan
+  key-field:
+    - name
+  view: VLANView
+
+VLANView:
+  fields:
+    name: name
+    description: description
+    vlan_id: vlan-id
+    l3iface: l3-interface
+    
+AccessInterfaceTable:
+  set: interfaces/interface
+  key-field:
+    - name
+    - unit_name
+  view: AccessInterfaceView
+
+AccessInterfaceView:
+  fields:
+    name: { 'name' : { 'default' : 0 } }
+    unit_name: unit/name
+    vlan: unit/family/ethernet-switching/vlan/members
+    mode: unit/family/ethernet-switching/interface-mode 
+    
+
+InterfaceTable:
+  set: interfaces/interface
+  key-field:
+    - name
+    - unit_name
+  view: InterfaceView
+
+InterfaceView:
+  fields:
+    name: { 'name' : { 'default' : 0 } }
+    unit_name: unit/name
+    ip_address: unit/family/inet/address

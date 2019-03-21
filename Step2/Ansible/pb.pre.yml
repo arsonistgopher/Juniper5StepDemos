@@ -1,0 +1,28 @@
+---
+ - name: Do pre-checks and render templates
+   hosts: "{{ target }}"
+   roles:
+     - Juniper.junos
+   connection: local
+   gather_facts: no
+
+   tasks:
+      - name: Do snapcheck for pre-tests (collisions).
+        juniper_junos_jsnapy:
+          provider: "{{ provider_info }}"
+          action: "snapcheck"
+          dir: "./tests"
+          test_files:
+            - "pre.yml"
+          logfile: "jsnapy_tests.log"
+        register: test_result
+
+      - name: Verify JSNAPy tests pass
+        assert:
+          that:
+            - "test_result.passPercentage == 100"
+
+      - name: Render interface configuration for junos devices
+        template:
+          src: "{{ playbook_dir }}/{{ target }}.config.template.j2"
+          dest: "{{ playbook_dir }}/{{ inventory_hostname }}.ifaces.conf"
