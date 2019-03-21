@@ -1,8 +1,0 @@
-# Example from JNSAPy guide.
-hosts:
-  - device: demo01.ipengineer.net
-    username: demo
-    passwd: Passw0rd
-tests:
-  - test_no_diff.yml 
-  - test_ge-0-0-1_0_desc.yml

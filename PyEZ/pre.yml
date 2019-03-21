@@ -1,7 +1,0 @@
-# Pre-Test for basic automation
-hosts:
-  - device: demo01
-    username: tf
-    passwd: Passw0rd
-tests:
-  - ./tests/pre.yml 
